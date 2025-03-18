@@ -36,7 +36,21 @@ export default {
       const success = await this.$store.dispatch('login', credentials);
 
       if (success) {
-        this.$router.push('/dashboard'); // Redireciona para o dashboard após o login
+        const userRole = this.$store.getters.userRole;
+
+        switch (userRole) {
+          case 'admin':
+            this.$router.push('/dashboard')
+            break;
+          case 'desenvolvedor':
+            this.$router.push('/dashboard')
+            break;
+          case 'recursos-humanos':
+            this.$router.push('/dashboard')
+            break;
+          default:
+            this.$router.push('/login');
+        }
       } else {
         this.error = 'Credenciais inválidas. Tente novamente.';
       }

@@ -16,9 +16,19 @@ export default createStore({
   actions: {
     login({ commit }, credentials) {
 
-      if (credentials.email === 'admin@convicti.com' && credentials.password === '12345678') {
+      const users = [
+        { email: 'admin@convicti.com', password: '12345678', role: 'admin' },
+        { email: 'dev@convicti.com', password: '12345678', role: 'desenvolvedor' },
+        { email: 'rh@convicti.com', password: '12345678', role: 'recursos-humanos' },
+      ];
+
+      const user = users.find(
+        (u) => u.email === credentials.email && u.password === credentials.password
+      );
+
+      if (user) {
         commit('setAuthentication', true);
-        commit('setUser', { email: credentials.email, role: 'admin' }); 
+        commit('setUser', user); // Armazena o usuário com o perfil
         return true;
       }
       return false;
@@ -28,4 +38,7 @@ export default createStore({
       commit('setUser', null);
     },
   },
+  getters: {
+    userRole: (state) => (state.user ? state.user.role : null),
+  }
 });
