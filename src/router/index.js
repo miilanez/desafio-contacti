@@ -9,12 +9,12 @@ import Perfis from '@/views/Perfis.vue';
 const routes = [
   {
     path: '/',
-    redirect: '/login', // Redireciona para o login
+    redirect: '/login',
   },
   {
     path: '/login',
     name: 'Login',
-    component: Login, // Componente da tela de login
+    component: Login, 
   },
   {
     path: '/dashboard',
@@ -26,13 +26,13 @@ const routes = [
     path: '/perfis',
     name: 'Perfis',
     component: Perfis,
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
   {
     path: '/usuarios',
     name: 'Usuarios',
     component: Usuarios, 
-    meta: { requiresAuth: true },
+    meta: { requiresAuth: true, requiresAdmin: true },
   },
 ];
 
@@ -45,10 +45,17 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const {isAuthenticated} = store.state;
+  const {userRole} = store.getters;
 
-    if (to.meta.requiresAuth && !isAuthenticated) {
-      next('/login');
-    } else {
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next('/login');
+  } else if (to.meta.requiresAdmin && userRole !== 'admin') {
+    next('/dashboard'); 
+  } else if (to.meta.requiresDesenvolvedor && userRole !== 'desenvolvedor') {
+    next('/dashboard'); 
+  } else if (to.meta.requiresRecursosHumanos && userRole !== 'recursos-humanos') {
+    next('/dashboard');
+  } else {
     next();
   }
 });
