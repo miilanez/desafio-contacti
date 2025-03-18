@@ -48,15 +48,14 @@ router.beforeEach((to, from, next) => {
   const {userRole} = store.getters;
 
   if (to.meta.requiresAuth && !isAuthenticated) {
-    next('/login'); // Redireciona para o login se não estiver autenticado
+    next('/login');
   } else if (to.meta.requiresAdmin && userRole !== 'admin') {
-    next('/dashboard'); // Redireciona para o dashboard se não for admin
+    next('/dashboard'); 
   } else if (to.meta.requiresDesenvolvedor && userRole !== 'desenvolvedor') {
-    next('/dashboard'); // Redireciona para o dashboard se não for desenvolvedor
+    next('/dashboard'); 
   } else if (to.meta.requiresRecursosHumanos && userRole !== 'recursos-humanos') {
-    next('/dashboard'); // Redireciona para o dashboard se não for recursos humanos
+    next('/dashboard');
   } else {
-    next(); // Permite o acesso à rota
   }
 });
 

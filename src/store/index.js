@@ -28,7 +28,7 @@ export default createStore({
 
       if (user) {
         commit('setAuthentication', true);
-        commit('setUser', user); // Armazena o usuário com o perfil
+        commit('setUser', user);
         return true;
       }
       return false;
