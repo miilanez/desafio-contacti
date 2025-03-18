@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '@/store';
 
 import Login from '@/views/Login.vue'; 
 import Dashboard from '@/views/Dashboard.vue';
@@ -18,23 +19,38 @@ const routes = [
   {
     path: '/dashboard',
     name: 'Dashboard',
-    component: Dashboard, // Componente do dashboard
+    component: Dashboard,
+    meta: { requiresAuth: true },
   },
   {
     path: '/perfis',
     name: 'Perfis',
-    component: Perfis, // Componente de visualização dos perfis
+    component: Perfis,
+    meta: { requiresAuth: true },
   },
   {
     path: '/usuarios',
     name: 'Usuarios',
-    component: Usuarios, // Componente de visualização dos usuários
+    component: Usuarios, 
+    meta: { requiresAuth: true },
   },
 ];
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
+});
+
+// Protegendo rotas com o beforeEach
+
+router.beforeEach((to, from, next) => {
+  const {isAuthenticated} = store.state;
+
+    if (to.meta.requiresAuth && !isAuthenticated) {
+      next('/login');
+    } else {
+    next();
+  }
 });
 
 export default router;
