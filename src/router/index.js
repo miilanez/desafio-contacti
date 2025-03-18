@@ -56,6 +56,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.meta.requiresRecursosHumanos && userRole !== 'recursos-humanos') {
     next('/dashboard');
   } else {
+    next();
   }
 });
 

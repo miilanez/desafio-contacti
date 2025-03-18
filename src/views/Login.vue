@@ -37,19 +37,12 @@ export default {
 
       if (success) {
         const userRole = this.$store.getters.userRole;
+        const validRoles = ['admin', 'desenvolvedor', 'recursos-humanos'];
 
-        switch (userRole) {
-          case 'admin':
-            this.$router.push('/dashboard')
-            break;
-          case 'desenvolvedor':
-            this.$router.push('/dashboard')
-            break;
-          case 'recursos-humanos':
-            this.$router.push('/dashboard')
-            break;
-          default:
-            this.$router.push('/login');
+        if (validRoles.includes(userRole)) {
+          this.$router.push('/dashboard');
+        } else {
+          this.$router.push('/login');
         }
       } else {
         this.error = 'Credenciais inválidas. Tente novamente.';
