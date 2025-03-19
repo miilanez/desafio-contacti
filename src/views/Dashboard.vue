@@ -1,40 +1,76 @@
 <template>
   <div class="dashboard">
-    <h1>Dashboard</h1>
 
-    <!-- Perfis -->
-     <section v-if="isAdmin">
-       <nav>
-         <router-link to="/perfis">Gerenciar Perfis</router-link>
-         <router-link to="/usuarios">Gerenciar Usuários</router-link>
-       </nav>
-    </section>
-
-    <!-- Downloads -->
-    <section v-if="isAdmin || isDesenvolvedor">
-      <h2>Downloads</h2>
-      <p>Total de Downloads: 330</p>
-    </section>
-
-    <!-- Avaliações -->
-    <section v-if="isAdmin || isDesenvolvedor || isRecursosHumanos">
-      <h2>Avaliações</h2>
-      <p>Média de Avaliações: 4.2</p>
-    </section>
-
-    <!-- Erros -->
-    <section v-if="isAdmin || isDesenvolvedor">
-      <h2>Erros</h2>
-      <p>Total de Erros: 4</p>
-    </section>
-
-    <!-- Novas Funcionalidades -->
-    <section v-if="isAdmin || isDesenvolvedor">
-      <h2>Novas Funcionalidades</h2>
-      <p>Funcionalidades em Desenvolvimento: 2</p>
-    </section>
-
-    <button @click="logout">Sair</button>
+    <main class="content">
+      <h1>Estatísticas</h1>
+      
+      <!-- Cards de Estatísticas -->
+      <section class="stats">
+        <div class="card">
+          <h2>Downloads</h2>
+          <p class="value">330</p>
+          <p class="sub">📥 240 📱 90</p>
+        </div>
+        <div class="card">
+          <h2>Avaliações</h2>
+          <p class="value">4.2/5</p>
+          <p class="sub">⭐ 5.0 ⭐ 4.0</p>
+        </div>
+        <div class="card">
+          <h2>Erros</h2>
+          <p class="value">4</p>
+          <p class="sub">⚠️ 2 📱 1 (-5%)</p>
+        </div>
+      </section>
+      
+      <!-- Feedbacks -->
+      <section class="feedbacks">
+        <h2>Feedbacks</h2>
+        <table>
+          <tr>
+            <th>Avaliação</th>
+            <th>Data</th>
+            <th>Avaliação</th>
+            <th>Melhorias</th>
+            <th>Plataforma</th>
+          </tr>
+          <tr>
+            <td>Aplicação ficou boa...</td>
+            <td>01/04/24</td>
+            <td>4</td>
+            <td>Dados de Produção</td>
+            <td>Android</td>
+          </tr>
+          <tr>
+            <td>Poderiam atualizar...</td>
+            <td>30/03/24</td>
+            <td>5</td>
+            <td>Suporte ao Usuário</td>
+            <td>iOS</td>
+          </tr>
+        </table>
+      </section>
+      
+      <!-- Novas Funcionalidades -->
+      <section class="features">
+        <h2>Novas Funcionalidades</h2>
+        <table>
+          <tr>
+            <th>Funcionalidade</th>
+            <th>Taxa de Uso</th>
+          </tr>
+          <tr>
+            <td>Veículo Em Rota</td>
+            <td>92%</td>
+          </tr>
+          <tr>
+            <td>Avaliação de Coleta</td>
+            <td>78%</td>
+          </tr>
+        </table>
+      </section>
+    </main>
+    
   </div>
 </template>
 
@@ -63,34 +99,48 @@ export default {
 
 <style scoped>
 .dashboard {
+  display: flex;
+  background-color: #F8F8F8;
+}
+
+.content {
+  flex: 1;
   padding: 20px;
 }
-
-section {
+.stats {
+  display: flex;
+  gap: 20px;
   margin-bottom: 20px;
+}
+.card {
+  background: #fff;
   padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+  flex: 1;
+  text-align: center;
+}
+.value {
+  font-size: 24px;
+  font-weight: bold;
+}
+.sub {
+  font-size: 14px;
+  color: gray;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+th {
+  background: #f4f4f4;
 }
 
-h2 {
-  color: #333;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
 
-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: #ff4444;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #cc0000;
-}
 </style>
