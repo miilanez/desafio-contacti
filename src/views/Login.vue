@@ -179,6 +179,8 @@ button {
   display: block;
   position: relative;
   z-index: 2;
+  border-radius: 7px;
+  box-shadow: -3px 3px 2px 0 rgba(0, 0, 0, 0.3);
 }
 
 /* Pseudo-elementos para os círculos */
