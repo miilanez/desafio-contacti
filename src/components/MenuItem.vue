@@ -1,5 +1,6 @@
 <template>
     <li class="menu-item" :class="{ active: active }" @click="handleClick">
+        <img :src="imgSrc" alt="icon" class="menu-item-icon" v-if="imgSrc" />
         <span class="menu-item-label">{{ label }}</span>
     </li>
 </template>
@@ -11,20 +12,20 @@ export default {
     props: {
         label: {
             type: String,
-            required: true, // Rótulo do item (ex: "Dashboard", "Configurações")
+            required: true,
         },
-        // icon: {
-        //     type: String,
-        //     default: '', // Nome do ícone (opcional)
-        // },
+        imgSrc: {
+            type: String,
+            default: '',
+        },
         active: {
             type: Boolean,
-            default: false, // Indica se o item está ativo
+            default: false,
         },
     },
     methods: {
         handleClick() {
-            this.$emit('click'); // Emite um evento de clique
+            this.$emit('click');
         },
     },
 };
@@ -49,14 +50,13 @@ export default {
 
 .menu-item.active {
     background-color: #DEE6F8;
-    /* Cor de fundo para item ativo */
     font-weight: bold;
 }
 
-/* .menu-item-icon {
-  margin-right: 10px;
-  font-size: 18px;
-} */
+.menu-item-icon {
+    margin-right: 10px;
+    width: 18px;
+}
 
 .menu-item-label {
     font-size: 16px;

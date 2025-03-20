@@ -10,16 +10,16 @@
         <div class="menu">
             <div>
                 <!-- Item Dashboard -->
-                <MenuItem label="Dashboard" :active="activeItem === 'dashboard'" @click="setActiveItem('dashboard')" />
+                <MenuItem label="Dashboard" :imgSrc="dashboardIcon" :active="activeItem === 'dashboard'" @click="setActiveItem('dashboard')" />
             </div>
 
             <nav class="opcoes">
                 <ul>
                     <!-- Item Configurações -->
-                    <MenuItem label="Configurações" :active="activeItem === 'settings'"
+                    <MenuItem label="Configurações" :imgSrc="configIcon" :active="activeItem === 'settings'"
                         @click="setActiveItem('settings')" />
                     <!-- Item Sair -->
-                    <MenuItem label="Sair" @click="logout" />
+                    <MenuItem label="Sair" :imgSrc="logoutIcon" @click="logout" />
                 </ul>
             </nav>
         </div>
@@ -28,15 +28,21 @@
 
 <script>
 import MenuItem from './MenuItem.vue';
+import dashboardIcon from '../assets/images/icons/dashboard.png'
+import configIcon from '../assets/images/icons/settings.png'
+import logoutIcon from '../assets/images/icons/exit.png'
 
 export default {
     name: 'AppSidebar',
     components: {
-        MenuItem, // Registrando apenas o MenuItem
+        MenuItem,
     },
     data() {
         return {
-            activeItem: 'dashboard', // Item ativo inicial
+            activeItem: 'dashboard',
+            dashboardIcon,
+            configIcon,
+            logoutIcon,
         };
     },
     methods: {
