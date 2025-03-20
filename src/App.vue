@@ -1,24 +1,34 @@
 <template>
   <div id="app">
+    <Sidebar v-if="isAuthenticated" />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
+import Sidebar from './components/Sidebar.vue';
+
 export default {
   name: 'App',
   components: {
-
+    Sidebar
+  },
+  computed: {
+    ...mapState(['isAuthenticated'])
+  },
+  methods: {
+    ...mapActions(['logout'])
   }
 };
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   display: flex;
-  justify-content: center;
+}
+
+#app > * {
+  flex: 1;
 }
 </style>
