@@ -6,17 +6,23 @@
             <h1>PAINEL DE DADOS</h1>
         </div>
         <!-- Menu de Navegação -->
-        <nav>
-            <ul>
+
+        <div class="menu">
+            <div>
                 <!-- Item Dashboard -->
                 <MenuItem label="Dashboard" :active="activeItem === 'dashboard'" @click="setActiveItem('dashboard')" />
-                <!-- Item Configurações -->
-                <MenuItem label="Configurações" :active="activeItem === 'settings'"
-                    @click="setActiveItem('settings')" />
-                <!-- Item Sair -->
-                <MenuItem label="Sair" @click="logout" />
-            </ul>
-        </nav>
+            </div>
+
+            <nav class="opcoes">
+                <ul>
+                    <!-- Item Configurações -->
+                    <MenuItem label="Configurações" :active="activeItem === 'settings'"
+                        @click="setActiveItem('settings')" />
+                    <!-- Item Sair -->
+                    <MenuItem label="Sair" @click="logout" />
+                </ul>
+            </nav>
+        </div>
     </aside>
 </template>
 
@@ -65,14 +71,25 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 35px;
+}
+
+.title h1 {
+    height:20px;
     font-weight: bold;
     font-size: 14px;
-    margin-bottom: 20px;
 }
 
 .logo {
     width: 85px;
     margin-bottom: 30px;
+}
+
+.menu {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 nav ul {
