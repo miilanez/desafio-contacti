@@ -10,14 +10,15 @@
         <div class="menu">
             <div>
                 <!-- Item Dashboard -->
-                <MenuItem label="Dashboard" :imgSrc="dashboardIcon" :active="activeItem === 'dashboard'" @click="setActiveItem('dashboard')" />
+                <MenuItem label="Dashboard" :imgSrc="dashboardIcon" :active="activeItem === 'dashboard'"
+                    @click="setActiveItem('dashboard')" />
             </div>
 
             <nav class="opcoes">
                 <ul>
                     <!-- Item Configurações -->
                     <MenuItem label="Configurações" :imgSrc="configIcon" :active="activeItem === 'settings'"
-                        @click="setActiveItem('settings')" />
+                        @click="setActiveItem('settings')" v-if="isAdmin" />
                     <!-- Item Sair -->
                     <MenuItem label="Sair" :imgSrc="logoutIcon" @click="logout" />
                 </ul>
@@ -45,18 +46,30 @@ export default {
             logoutIcon,
         };
     },
-    methods: {
-        // Define o item ativo
-        setActiveItem(item) {
-            this.activeItem = item;
-            this.$emit('item-clicked', item); // Emite um evento para o componente pai
-        },
-        // Logout
-        logout() {
-            this.$store.dispatch('logout'); // Dispara a ação de logout
-            this.$router.push('/login'); // Redireciona para a página de login
+    computed: {
+        isAdmin() {
+            return this.$store.getters.userRole === 'admin';
         },
     },
+    methods: {
+        // Define o item ativo e navega para a rota correspondente
+        setActiveItem(item) {
+            this.activeItem = item;
+
+            // Mapeia os itens do menu para as rotas correspondentes
+            const routeMap = {
+                dashboard: '/dashboard',
+                settings: '/configuracoes',
+            };
+
+            // Navega para a rota correspondente
+            if (routeMap[item]) {
+                this.$router.push(routeMap[item]);
+            }
+
+            this.$emit('item-clicked', item); // Emite um evento para o componente pai (opcional)
+        },
+    }
 }
 </script>
 
@@ -81,14 +94,14 @@ export default {
 }
 
 .title h1 {
-    height:20px;
+    height: 20px;
     font-weight: bold;
     font-size: 14px;
 }
 
 .logo {
     width: 80px;
-    height:60px;
+    height: 60px;
     margin-bottom: 30px;
 }
 

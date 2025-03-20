@@ -3,8 +3,7 @@ import store from '@/store';
 
 import Login from '@/views/Login.vue'; 
 import Dashboard from '@/views/Dashboard.vue';
-import Usuarios from '@/views/Usuarios.vue';
-import Perfis from '@/views/Perfis.vue';
+import Configuracoes from '@/views/Configuracoes.vue';
 
 const routes = [
   {
@@ -23,15 +22,9 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: '/perfis',
-    name: 'Perfis',
-    component: Perfis,
-    meta: { requiresAuth: true, requiresAdmin: true },
-  },
-  {
-    path: '/usuarios',
-    name: 'Usuarios',
-    component: Usuarios, 
+    path: '/configuracoes',
+    name: 'Configurações',
+    component: Configuracoes,
     meta: { requiresAuth: true, requiresAdmin: true },
   },
 ];

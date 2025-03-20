@@ -6,14 +6,20 @@
       <section class="stats">
         <h1 class="content-title">Estatísticas</h1>
         <div class="stats-cards">
-          <Card label="Downloads" :imgSrc="downloadIcon" value="330" androidStats="100" appleStats="98" />
-          <Card label="Avaliações" :imgSrc="avaliationIcon" value="4.2/5" androidStats="5.0" appleStats="4.0" />
-          <Card label="Erros" :imgSrc="errorIcon" value="4" androidStats="2" appleStats="1" errorPercentage="5%" />
+          <div v-if="isAdmin || isDesenvolvedor">
+            <Card label="Downloads" :imgSrc="downloadIcon" value="330" androidStats="100" appleStats="98" />
+          </div>
+          <div v-if="isAdmin || isDesenvolvedor || isRecursosHumanos">
+            <Card label="Avaliações" :imgSrc="avaliationIcon" value="4.2/5" androidStats="5.0" appleStats="4.0" />
+          </div>
+          <div v-if="isAdmin || isDesenvolvedor">
+            <Card label="Erros" :imgSrc="errorIcon" value="4" androidStats="2" appleStats="1" errorPercentage="5%" />
+          </div>
         </div>
       </section>
 
       <!-- Feedbacks -->
-      <section class="feedbacks">
+      <section class="feedbacks" v-if="isAdmin">
         <Table label="Feedbacks" :headers="['Avaliação', 'Data', 'Avaliação', 'Melhorias', 'Plataforma']" :rows="[
           ['Aplicação ficou boa...', '01/04/24', '4', 'Dados de Produção', 'Android'],
           ['Poderiam atualizar...', '30/03/24', '5', 'Suporte ao Usuário', 'iOS'],
@@ -23,7 +29,7 @@
       </section>
 
       <!-- Novas Funcionalidades -->
-      <section class="features">
+      <section class="features" v-if="isAdmin || isDesenvolvedor">
         <Table label="Novas Funcionalidades" :headers="['Funcionalidade', 'Taxa de Uso']" :rows="[
           ['Veículo Em Rota', '92%'],
           ['Avaliação de Coleta', '78%'],
@@ -105,14 +111,6 @@ export default {
   margin-bottom: 20px;
 }
 
-.card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  text-align: center;
-}
 
 .value {
   font-size: 24px;
