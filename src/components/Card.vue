@@ -62,6 +62,7 @@ export default {
 <style scoped>
 .card-container {
     flex: 1;
+    min-width: 325px;
     height: 141px;
     display: flex;
     flex-direction: column;

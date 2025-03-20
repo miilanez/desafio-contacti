@@ -111,14 +111,6 @@ export default {
   margin-bottom: 20px;
 }
 
-.card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-  flex: 1;
-  text-align: center;
-}
 
 .value {
   font-size: 24px;
