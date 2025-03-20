@@ -52,22 +52,23 @@ export default {
         },
     },
     methods: {
-        // Define o item ativo e navega para a rota correspondente
         setActiveItem(item) {
             this.activeItem = item;
 
-            // Mapeia os itens do menu para as rotas correspondentes
             const routeMap = {
                 dashboard: '/dashboard',
                 settings: '/configuracoes',
             };
 
-            // Navega para a rota correspondente
             if (routeMap[item]) {
                 this.$router.push(routeMap[item]);
             }
 
-            this.$emit('item-clicked', item); // Emite um evento para o componente pai (opcional)
+            this.$emit('item-clicked', item);
+        },
+        logout() {
+            this.$store.dispatch('logout');
+            this.$router.push('/login');
         },
     }
 }
@@ -83,7 +84,6 @@ export default {
     flex-direction: column;
     align-items: center;
     background-color: #ffffff;
-    /* Cor de fundo */
 }
 
 .title {
@@ -116,7 +116,6 @@ nav ul {
     list-style: none;
     padding: 0;
     width: 100%;
-    /* Largura total */
 }
 
 nav li {
