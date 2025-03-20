@@ -2,30 +2,19 @@
   <div class="dashboard">
 
     <main class="content">
-      <h1>Estatísticas</h1>
-      
       <!-- Cards de Estatísticas -->
       <section class="stats">
-        <div class="card">
-          <h2>Downloads</h2>
-          <p class="value">330</p>
-          <p class="sub">📥 240 📱 90</p>
-        </div>
-        <div class="card">
-          <h2>Avaliações</h2>
-          <p class="value">4.2/5</p>
-          <p class="sub">⭐ 5.0 ⭐ 4.0</p>
-        </div>
-        <div class="card">
-          <h2>Erros</h2>
-          <p class="value">4</p>
-          <p class="sub">⚠️ 2 📱 1 (-5%)</p>
+        <h1 class="content-title">Estatísticas</h1>
+        <div class="stats-cards">
+          <Card label="Downloads" :imgSrc="downloadIcon" value="330" androidStats="100" appleStats="98" />
+          <Card label="Avaliações" :imgSrc="avaliationIcon" value="4.2/5" androidStats="5.0" appleStats="4.0" />
+          <Card label="Erros" :imgSrc="errorIcon" value="4" androidStats="2" appleStats="1" errorPercentage="5%"/>
         </div>
       </section>
-      
+
       <!-- Feedbacks -->
       <section class="feedbacks">
-        <h2>Feedbacks</h2>
+        <p class="section-title">Feedbacks</p>
         <table>
           <tr>
             <th>Avaliação</th>
@@ -50,10 +39,10 @@
           </tr>
         </table>
       </section>
-      
+
       <!-- Novas Funcionalidades -->
       <section class="features">
-        <h2>Novas Funcionalidades</h2>
+        <p class="section-title">Novas Funcionalidades</p>
         <table>
           <tr>
             <th>Funcionalidade</th>
@@ -70,13 +59,28 @@
         </table>
       </section>
     </main>
-    
+
   </div>
 </template>
 
 <script>
+import Card from '@/components/Card.vue';
+import downloadIcon from '../assets/images/icons/cloud-download.png';
+import avaliationIcon from '../assets/images/icons/star-comment.png';
+import errorIcon from '../assets/images/icons/times-hexagon.png';
+
 export default {
   name: 'AppDashboard',
+  components: {
+    Card,
+  },
+  data() {
+    return {
+      downloadIcon,
+      avaliationIcon,
+      errorIcon,
+    };
+  },
   computed: {
     isAdmin() {
       return this.$store.getters.userRole === 'admin';
@@ -105,42 +109,63 @@ export default {
 
 .content {
   flex: 1;
-  padding: 20px;
+  padding: 40px;
 }
+
+.content-title {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 25px;
+}
+
+.section-title {
+  margin-bottom: 20px;
+}
+
 .stats {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats-cards {
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
 }
+
 .card {
   background: #fff;
   padding: 15px;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   flex: 1;
   text-align: center;
 }
+
 .value {
   font-size: 24px;
   font-weight: bold;
 }
+
 .sub {
   font-size: 14px;
   color: gray;
 }
+
 table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
 }
-th, td {
+
+th,
+td {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
 }
+
 th {
   background: #f4f4f4;
 }
-
-
 </style>
