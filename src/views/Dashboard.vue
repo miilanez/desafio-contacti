@@ -8,55 +8,26 @@
         <div class="stats-cards">
           <Card label="Downloads" :imgSrc="downloadIcon" value="330" androidStats="100" appleStats="98" />
           <Card label="Avaliações" :imgSrc="avaliationIcon" value="4.2/5" androidStats="5.0" appleStats="4.0" />
-          <Card label="Erros" :imgSrc="errorIcon" value="4" androidStats="2" appleStats="1" errorPercentage="5%"/>
+          <Card label="Erros" :imgSrc="errorIcon" value="4" androidStats="2" appleStats="1" errorPercentage="5%" />
         </div>
       </section>
 
       <!-- Feedbacks -->
       <section class="feedbacks">
-        <p class="section-title">Feedbacks</p>
-        <table>
-          <tr>
-            <th>Avaliação</th>
-            <th>Data</th>
-            <th>Avaliação</th>
-            <th>Melhorias</th>
-            <th>Plataforma</th>
-          </tr>
-          <tr>
-            <td>Aplicação ficou boa...</td>
-            <td>01/04/24</td>
-            <td>4</td>
-            <td>Dados de Produção</td>
-            <td>Android</td>
-          </tr>
-          <tr>
-            <td>Poderiam atualizar...</td>
-            <td>30/03/24</td>
-            <td>5</td>
-            <td>Suporte ao Usuário</td>
-            <td>iOS</td>
-          </tr>
-        </table>
+        <Table label="Feedbacks" :headers="['Avaliação', 'Data', 'Avaliação', 'Melhorias', 'Plataforma']" :rows="[
+          ['Aplicação ficou boa...', '01/04/24', '4', 'Dados de Produção', 'Android'],
+          ['Poderiam atualizar...', '30/03/24', '5', 'Suporte ao Usuário', 'iOS'],
+          ['Interface muito intuitiva.', '25/03/24', '5', 'Nenhuma', 'Android'],
+          ['Precisa de mais funcionalidades.', '20/03/24', '3', 'Adicionar relatórios', 'iOS'],
+        ]" />
       </section>
 
       <!-- Novas Funcionalidades -->
       <section class="features">
-        <p class="section-title">Novas Funcionalidades</p>
-        <table>
-          <tr>
-            <th>Funcionalidade</th>
-            <th>Taxa de Uso</th>
-          </tr>
-          <tr>
-            <td>Veículo Em Rota</td>
-            <td>92%</td>
-          </tr>
-          <tr>
-            <td>Avaliação de Coleta</td>
-            <td>78%</td>
-          </tr>
-        </table>
+        <Table label="Novas Funcionalidades" :headers="['Funcionalidade', 'Taxa de Uso']" :rows="[
+          ['Veículo Em Rota', '92%'],
+          ['Avaliação de Coleta', '78%'],
+        ]" />
       </section>
     </main>
 
@@ -68,11 +39,12 @@ import Card from '@/components/Card.vue';
 import downloadIcon from '../assets/images/icons/cloud-download.png';
 import avaliationIcon from '../assets/images/icons/star-comment.png';
 import errorIcon from '../assets/images/icons/times-hexagon.png';
+import Table from '@/components/Table.vue';
 
 export default {
   name: 'AppDashboard',
   components: {
-    Card,
+    Card, Table
   },
   data() {
     return {
@@ -109,13 +81,13 @@ export default {
 
 .content {
   flex: 1;
-  padding: 40px;
+  padding: 20px;
 }
 
 .content-title {
   font-size: 32px;
   font-weight: bold;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
 }
 
 .section-title {
