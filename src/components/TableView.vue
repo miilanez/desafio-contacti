@@ -2,7 +2,7 @@
     <div class="tabela-container">
         <div class="tabela-header">
             <h2>{{ titulo }}</h2>
-            <img src="../assets/images/icons/square-plus.png" @click="adicionar" class="btn-adicionar" />
+            <img src="../assets/images/icons/square-plus.png" @click="abrirModalAdicionar" class="btn-adicionar" />
         </div>
 
         <table class="tabela">
@@ -15,18 +15,27 @@
             <tbody>
                 <tr v-for="item in dados" :key="item.id">
                     <td v-for="coluna in colunas" :key="coluna.campo">{{ item[coluna.campo] }}</td>
-                    <td class="action"> 
+                    <td class="action">
                         <img src="../assets/images/icons/edit.png" @click="editar(item)" class="btn-editar" />
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Modal -->
+        <Modal :isOpen="isModalOpen" :modalType="modalType" :modalTitulo="modalTitulo"
+            :modalPlaceholder="modalPlaceholder" @close="closeModal" />
     </div>
 </template>
 
 <script>
+import Modal from '../components/Modal.vue';
+
 export default {
     name: 'TableView',
+    components: {
+        Modal,
+    },
     props: {
         titulo: {
             type: String,
@@ -41,9 +50,30 @@ export default {
             required: true,
         },
     },
+    data() {
+        return {
+            isModalOpen: false,
+            modalType: 'perfil',
+            modalTitulo: '',
+            modalPlaceholder: '',
+        };
+    },
     methods: {
-        adicionar() {
-            this.$emit('adicionar');
+        abrirModalAdicionar() {
+
+            if (this.titulo.includes('Perfis')) {
+                this.modalType = 'perfil';
+                this.modalTitulo = 'Adicionar Perfil';
+                this.modalPlaceholder = 'Novo perfil';
+            } else {
+                this.modalType = 'usuario';
+                this.modalTitulo = 'Adicionar Usuário';
+                this.modalPlaceholder = 'Novo usuário';
+            }
+            this.isModalOpen = true;
+        },
+        closeModal() {
+            this.isModalOpen = false;
         },
         editar(item) {
             this.$emit('editar', item);
@@ -107,8 +137,6 @@ export default {
     color: grey;
     font-size: 12px;
 }
-
-
 
 .tabela tbody tr:nth-child(even) {
     background-color: white;
