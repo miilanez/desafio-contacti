@@ -2,21 +2,21 @@
     <div class="tabela-container">
         <div class="tabela-header">
             <h2>{{ titulo }}</h2>
-            <button @click="adicionar" class="btn-adicionar">Adicionar</button>
+            <img src="../assets/images/icons/square-plus.png" @click="adicionar" class="btn-adicionar" />
         </div>
 
         <table class="tabela">
             <thead>
                 <tr>
                     <th v-for="coluna in colunas" :key="coluna.campo">{{ coluna.titulo }}</th>
-                    <th>Ações</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr v-for="item in dados" :key="item.id">
                     <td v-for="coluna in colunas" :key="coluna.campo">{{ item[coluna.campo] }}</td>
-                    <td>
-                        <button @click="editar(item)" class="btn-editar">Editar</button>
+                    <td class="action"> 
+                        <img src="../assets/images/icons/edit.png" @click="editar(item)" class="btn-editar" />
                     </td>
                 </tr>
             </tbody>
@@ -77,16 +77,17 @@ export default {
 }
 
 .btn-adicionar {
-    padding: 8px 16px;
-    background-color: #42b983;
-    color: white;
+    width: 24px;
+    height: 24px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.2s ease;
 }
 
 .btn-adicionar:hover {
-    background-color: #369c6e;
+    opacity: 0.7;
 }
 
 .tabela {
@@ -107,6 +108,8 @@ export default {
     font-size: 12px;
 }
 
+
+
 .tabela tbody tr:nth-child(even) {
     background-color: white;
 }
@@ -116,15 +119,21 @@ export default {
 }
 
 .btn-editar {
-    padding: 6px 12px;
-    background-color: #ffc107;
-    color: white;
+    width: 14px;
+    height: 14px;
     border: none;
-    border-radius: 4px;
+    border-radius: 5px;
     cursor: pointer;
+    opacity: 1;
+    transition: opacity 0.2s ease;
 }
 
 .btn-editar:hover {
-    background-color: #e0a800;
+    opacity: 0.7;
+}
+
+.action {
+    width: 14px;
+    text-align: right;
 }
 </style>
